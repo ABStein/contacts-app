@@ -1,47 +1,49 @@
 class ContactsController < ApplicationController
   def index
-    @contacts = Contact.all 
-  end
+      @contacts = Contact.all
+    end
 
-  def new
-    
-  end
-  
-  def create
-    contact = Contact.new( 
-                          first_name: params[:first_name],
-                          last_name: params[:last_name],
-                          middle_name: params[:middle_name],
-                          email: params[:email],
-                          bio: params[:bio],
-                          phone_number: params[:phone_number]
-                          )
+    def show
+      @contact = Contact.find_by(id: params[:id])
+    end
 
-    contact.save
-  end
+    def new
+      
+    end
 
-  def show
-    @contact = Contact.find(params[:id]) 
-  end
+    def create
+      contact = Contact.new(
+                            first_name: params[:first_name], 
+                            last_name: params[:last_name], 
+                            email: params[:email], 
+                            phone_number: params[:phone_number]
+                            )
+      contact.save
+      flash[:success] = "Contact created."
+      redirect_to "/contacts/#{contact.id}"
+    end
 
-  def edit
-    @contact = Contact.find(params[:id])
-  end
+    def edit
+      @contact = Contact.find_by(id: params[:id])
+    end
 
-  def update
-    @contact = Contact.find(params[:id])
+    def update
+      contact = Contact.find_by(id: params[:id])
+      contact.assign_attributes(
+                                first_name: params[:first_name], 
+                                last_name: params[:last_name], 
+                                email: params[:email], 
+                                phone_number: params[:phone_number]
+                                )
+      contact.save
+      flash[:success] = "Contact updated."
+      redirect_to "/contacts/#{@contact.id}"
+    end
 
-    assign_attributes( 
-                      first_name: params[:first_name],
-                      last_name: params[:last_name],
-                      middle_name: params[:middle_name],
-                      email: params[:email],
-                      bio: params[:bio],
-                      phone_number: params[:phone_number]
-                      )
-  end
-
-  def delete
-    @contact = Contact.find(params[:id])
-  end
+    def destroy
+      @contact = Contact.find_by(id: params[:id])
+      @contact.destroy
+      flash[:warning] = "Contact deleted."
+      redirect_to "/"
+    end
 end
