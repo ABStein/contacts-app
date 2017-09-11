@@ -13,6 +13,7 @@ class ContactsController < ApplicationController
                           last_name: params[:last_name],
                           middle_name: params[:middle_name],
                           email: params[:email],
+                          bio: params[:bio],
                           phone_number: params[:phone_number]
                           )
 
@@ -35,6 +36,7 @@ class ContactsController < ApplicationController
                       last_name: params[:last_name],
                       middle_name: params[:middle_name],
                       email: params[:email],
+                      bio: params[:bio],
                       phone_number: params[:phone_number]
                       )
   end
