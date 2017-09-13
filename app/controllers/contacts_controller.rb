@@ -47,3 +47,9 @@ class ContactsController < ApplicationController
       redirect_to "/"
     end
 end
+
+# 
+# 1) we will need an action = url and a method = verb in our form in order to start using the search bar in the nav. 
+# 2) replace the form with a form tag in printing skull tags with a do loop.  
+# 3) By the input replace second deal with name and change to search_term
+# 4) got to the index controller and search_term = params(:search_term), if search_term, @contacts = @contacts.where( "first_name", iLIKE ?" "%#{search_term}%"
